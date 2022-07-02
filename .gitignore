@@ -1,0 +1,6 @@
+__pycache__/
+results/
+results_bak/
+real_data/
+model_zoo/
+*.pyc

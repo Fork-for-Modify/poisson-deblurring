@@ -58,7 +58,7 @@ Prepare the variables for input to network
 kt = img_to_tens(kernel).to(device)
 yt = img_to_tens(y).to(device)
 alpha_t = scalar_to_tens(ALPHA).to(device)
-x_rec_list= p4ip_net(yt, kt, alpha_t)
+x_rec_list = p4ip_net(yt, kt, alpha_t)   # zzh: model eval
 x_rec = x_rec_list[-1]
 x_rec = x_rec.cpu().detach().numpy()
 x_net = np.clip(x_rec[0,0,:,:],0,1)
