@@ -10,7 +10,7 @@ from utils.utils_deblur import pad, crop
 from models.network_p4ip import P4IP_Net
 
 parser = argparse.ArgumentParser(description='Test on Real Data')
-parser.add_argument('--idx', type=int, default=24,
+parser.add_argument('--idx', type=int, default=23,
                     help='index of real data file [0,29]')
 args = parser.parse_args()
 
@@ -21,8 +21,8 @@ IDX = args.idx
 IDX_CLEAN = int(IDX/3)
 
 # Load data-files
-y = np.load(DIR+'/cut'+"%d" % IDX+'.npy') 			# Noisy image
-k = np.load(DIR+'/kernel'+"%d" % IDX+'.npy') 			# blur kernel
+y = np.load(DIR+'_bggr/cut'+"%d" % IDX+'.npy') 			# Noisy image
+k = np.load(DIR+'_bggr/kernel'+"%d" % IDX+'.npy') 			# blur kernel
 # Clipping negative values and normalization of kernel
 y = np.clip(y.astype(np.float32), 0, np.inf)
 k = np.clip(k.astype(np.float32), 0, np.inf)
@@ -80,20 +80,22 @@ cv2.imwrite('results/kernel_'+"%02d" % IDX+'.png',
 y_rg1b = np.stack((y_list[0], y_list[1], y_list[3]), axis=-1)
 y_rg1b = y_rg1b.astype(np.float32)*255/den
 cv2.imwrite('results/y_rg1b_'+"%02d" % IDX+'.png',
-            y_rg1b, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            y_rg1b)
 
 y_rg2b = np.stack((y_list[0], y_list[2], y_list[3]), axis=-1)
 y_rg2b = y_rg2b.astype(np.float32)*255/den
 cv2.imwrite('results/y_rg2b_'+"%02d" % IDX+'.png',
-            y_rg2b, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+            y_rg2b)
 
 
-## Load images in CV2 format for image registration and comparison
-# x_p4ip_cv = cv2.imread('results/p4ip_'+"%02d"%IDX+'.png')
-# x_gt_cv = cv2.imread(DIR+'_clean/'+str(IDX_CLEAN)+'.png')  # clean image
-# y_cv = cv2.imread('results/y_'+"%02d"%IDX+'.png')
+# Load images in CV2 format for image registration and comparison
+x_p4ip_cv = cv2.imread('results/p4ip_'+"%02d" % IDX+'.png')
+x_gt_cv = cv2.imread(DIR+'_clean/'+str(IDX_CLEAN)+'.png')  # clean image
+y_cv = cv2.imread('results/y_'+"%02d" % IDX+'.png')
 
-# im_true_register, im_estimated = img_register(x_gt_cv, x_p4ip_cv)
+im_true_register, im_estimated = img_register(x_gt_cv, x_p4ip_cv)
+cv2.imwrite('results/reference'+"%02d" % IDX+'.png',
+            im_true_register)
 # plt.figure(figsize=(10, 6))
 # plt.subplot(1, 3, 1)
 # plt.imshow(np.flip(im_true_register, axis=2))

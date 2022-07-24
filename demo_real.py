@@ -11,7 +11,8 @@ from utils.utils_deblur import pad, crop
 from models.network_p4ip import P4IP_Net
 
 parser = argparse.ArgumentParser(description='Test on Real Data')
-parser.add_argument('--idx', type=int, default=10, help='index of real data file [0,29]')
+parser.add_argument('--idx', type=int, default=18,
+                    help='index of real data file [0,29]')
 args = parser.parse_args()
 
 DIR = 'data/real_data/lux5'

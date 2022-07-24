@@ -4,3 +4,4 @@ results_bak/
 real_data/
 model_zoo/
 *.pyc
+data_proc/
