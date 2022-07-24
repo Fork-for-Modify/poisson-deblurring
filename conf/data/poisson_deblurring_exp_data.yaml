@@ -1,0 +1,12 @@
+# @package test_data_loader
+_target_: srcs.data_loader.poisson_deblurring_data_loaders.get_data_loaders
+load_blur_image_dir: ${hydra:runtime.cwd}/dataset/blur/ # blurry
+load_psf_dir: ${hydra:runtime.cwd}/dataset/kernel/
+exp_mode: real  # simu | real
+batch_size: 1
+patch_size:
+status: exp
+shuffle: False
+num_workers: ${num_workers}
+pin_memory: True
+prefetch_factor: 4

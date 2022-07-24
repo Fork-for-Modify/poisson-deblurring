@@ -1,0 +1,202 @@
+[2022-07-24 14:04:50,688][test][INFO] - P4IP_Net(
+  (init): InitNet(
+    (conv_layers): Sequential(
+      (0): Down(
+        (maxpool_conv): Sequential(
+          (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (1): DoubleConv(
+            (double_conv): Sequential(
+              (0): Conv2d(1, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+              (3): Conv2d(4, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (4): BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (5): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+      (1): Down(
+        (maxpool_conv): Sequential(
+          (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (1): DoubleConv(
+            (double_conv): Sequential(
+              (0): Conv2d(4, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+              (3): Conv2d(8, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (4): BatchNorm2d(8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (5): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+      (2): Down(
+        (maxpool_conv): Sequential(
+          (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (1): DoubleConv(
+            (double_conv): Sequential(
+              (0): Conv2d(8, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+              (3): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (4): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (5): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+      (3): Down(
+        (maxpool_conv): Sequential(
+          (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (1): DoubleConv(
+            (double_conv): Sequential(
+              (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+              (3): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (4): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (5): ReLU(inplace=True)
+            )
+          )
+        )
+      )
+    )
+    (mlp): Sequential(
+      (0): Linear(in_features=1025, out_features=64, bias=True)
+      (1): ReLU(inplace=True)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ReLU(inplace=True)
+      (4): Linear(in_features=64, out_features=16, bias=True)
+      (5): Softplus(beta=1, threshold=20)
+    )
+    (resize): Upsample(size=[256, 256], mode=bilinear)
+  )
+  (X): X_Update()
+  (U): U_Update()
+  (Z): Z_Update_ResUNet(
+    (net): ResUNet(
+      (m_head): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (m_down1): Sequential(
+        (0): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): Conv2d(64, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      )
+      (m_down2): Sequential(
+        (0): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): Conv2d(128, 256, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      )
+      (m_down3): Sequential(
+        (0): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): Conv2d(256, 512, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      )
+      (m_body): Sequential(
+        (0): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+      )
+      (m_up3): Sequential(
+        (0): ConvTranspose2d(512, 256, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+      )
+      (m_up2): Sequential(
+        (0): ConvTranspose2d(256, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+      )
+      (m_up1): Sequential(
+        (0): ConvTranspose2d(128, 64, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (2): ResBlock(
+          (res): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): ReLU(inplace=True)
+            (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+      )
+      (m_tail): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    )
+  )
+)
+[2022-07-24 14:05:05,513][test][INFO] - None
